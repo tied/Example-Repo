@@ -1,0 +1,36 @@
+#disable_html_escaping()
+<table width="100%" class="report">
+<tr><th class="reportHeading">
+#if ($project)
+    <h3 class="formtitle">$i18n.getText("common.concepts.project"): <a href="$baseurl/browse/$project.key">$textutils.htmlEncode($project.name)</a></h3>
+#elseif ($searchRequest)
+    <h3 class="formtitle">$i18n.getText("report.chart.filter"): <a href="$baseurl/issues/?filter=${searchRequest.id}">$textutils.htmlEncode($searchRequest.name)</a></h3>
+#end
+</th></tr>
+
+    #if  (($numCreatedIssues == 0) && ($numResolvedIssues == 0))
+        <tr><td>$i18n.getText("planvsactual.noissues")</td></tr>
+    #else
+        <tr>
+            <th class="subHeading">
+                <h3 class="bluetext">$i18n.getText("planvsactual.chart.chart")</h3>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                $i18n.getText("planvsactual.numissues1", "<b><span style='color:#c00;'>", "</span></b>", "<b><span style='color:#3c3;'>","</span></b>") $i18n.getText("planvsactual.numissues2", "<b>$daysPrevious</b>")<br/>
+
+                #if ($base64Image)
+                    #if ($imagemap)
+                        $imagemap
+                    #end
+                    <p class="report-chart">
+                        <img src='$base64Image' border='0' #if ($imagemap) usemap="\#$imagemapName" #end/>
+                    </p>
+                #else
+                    $i18n.getText("planvsactual.chart.nochart")
+                #end
+            </td>
+        </tr>
+    #end
+</table>

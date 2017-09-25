@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="reports-plugin"/>
+  <!-- add our web resources -->
+  <web-resource key="reports-plugin-resources" name="reports-plugin Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="reports-plugin.css" location="/css/reports-plugin.css"/>
+    <resource type="download" name="reports-plugin.js" location="/js/reports-plugin.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>reports-plugin</context>
+  </web-resource>
+  <!-- REPORTS -->
+  <report name="Plan Vs Actual" i18n-name-key="planvsactual.name" key="planVsActual" class="com.example.jira.reports.PlanVsActual">
+    <description key="planvsactual.description">This report shows reports</description>
+    <resource name="view" type="velocity" location="templates/reports/planVsActual/PlanVsActual-report.vm"/>
+    <resource name="i18n" type="i18n" location="i18n/planVsActual/PlanVsActual"/>
+    <label key="planvsactual.label"/>
+    <properties>
+      <property>
+        <key>projectOrFilterId</key>
+        <name>portlet.chart.field.project.or.filter.name</name>
+        <description>portlet.chart.field.project.or.filter.description</description>
+        <type>filterprojectpicker</type>
+        <i18n>false</i18n>
+      </property>
+      <property>
+        <key>periodName</key>
+        <name>portlet.chart.field.periodname.name</name>
+        <description>portlet.chart.field.periodname.description</description>
+        <type>select</type>
+        <default>daily</default>
+        <values>
+          <value>
+            <key>hourly</key>
+            <value>portlet.chart.field.periodname.hourly</value>
+          </value>
+          <value>
+            <key>daily</key>
+            <value>portlet.chart.field.periodname.daily</value>
+          </value>
+          <value>
+            <key>weekly</key>
+            <value>portlet.chart.field.periodname.weekly</value>
+          </value>
+          <value>
+            <key>monthly</key>
+            <value>portlet.chart.field.periodname.monthly</value>
+          </value>
+          <value>
+            <key>quarterly</key>
+            <value>portlet.chart.field.periodname.quarterly</value>
+          </value>
+          <value>
+            <key>yearly</key>
+            <value>portlet.chart.field.periodname.yearly</value>
+          </value>
+        </values>
+      </property>
+      <property>
+        <key>daysprevious</key>
+        <name>portlet.chart.field.daysprevious.name</name>
+        <description>portlet.chart.field.daysprevious.description</description>
+        <type>long</type>
+        <default>30</default>
+      </property>
+    </properties>
+  </report>
+  <report name="Histogram" i18n-name-key="histogram.name" key="histogram" class="com.example.jira.reports.Histogram">
+    <description key="histogram.description">The Histogram Plugin</description>
+    <resource name="view" type="velocity" location="/templates/reports/histogram/view.vm"/>
+    <resource name="i18n" type="i18n" location="i18n/histogram/Histogram"/>
+    <label key="histogram.label"></label>
+    <!-- the properties of this report which the user must select before running it -->
+    <properties>
+      <property>
+        <key>projectOrFilterId</key>
+        <name>portlet.chart.field.project.or.filter.name</name>
+        <description>portlet.chart.field.project.or.filter.description</description>
+        <type>filterprojectpicker</type>
+        <i18n>false</i18n>
+      </property>
+      <property>
+        <key>periodName</key>
+        <name>portlet.chart.field.periodname.name</name>
+        <description>portlet.chart.field.periodname.description</description>
+        <type>select</type>
+        <default>daily</default>
+        <values>
+          <value>
+            <key>hourly</key>
+            <value>portlet.chart.field.periodname.hourly</value>
+          </value>
+          <value>
+            <key>daily</key>
+            <value>portlet.chart.field.periodname.daily</value>
+          </value>
+          <value>
+            <key>weekly</key>
+            <value>portlet.chart.field.periodname.weekly</value>
+          </value>
+          <value>
+            <key>monthly</key>
+            <value>portlet.chart.field.periodname.monthly</value>
+          </value>
+          <value>
+            <key>quarterly</key>
+            <value>portlet.chart.field.periodname.quarterly</value>
+          </value>
+          <value>
+            <key>yearly</key>
+            <value>portlet.chart.field.periodname.yearly</value>
+          </value>
+        </values>
+      </property>
+      <property>
+        <key>daysprevious</key>
+        <name>portlet.chart.field.daysprevious.name</name>
+        <description>portlet.chart.field.daysprevious.description</description>
+        <type>long</type>
+        <default>30</default>
+      </property>
+    </properties>
+  </report>
+</atlassian-plugin>
